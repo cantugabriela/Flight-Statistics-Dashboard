@@ -25,7 +25,8 @@
 <body>
 
   <!-- NavBar -->
-  <nav class="navbar sticky-top navbar-dark bg-dark">
+
+ <nav class="navbar sticky-top navbar-dark bg-dark">
       <a class="navbar-brand" href="#"> Make better travel plans</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,30 +44,44 @@
           </li>
         </ul>
       </div>
-    </nav>
-<!-- Carousel -->
-<div class="container-fluid">
-    <div class='tableauPlaceholder' id='viz1541380469867' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fl&#47;FlightStatisticsDashboard&#47;AirlineStatsDashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FlightStatisticsDashboard&#47;AirlineStatsDashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fl&#47;FlightStatisticsDashboard&#47;AirlineStatsDashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1541380469867');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </nav> 
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#summary" role="button">Summary Stats</a>
+    <a class="btn btn-primary btn-lg" href="#map" role="button">Map</a>
+    <a class="btn btn-primary btn-lg" href="#pie" role="button">Pie Chart</a>
+    <a class="btn btn-primary btn-lg" href="#bar" role="button">Bar Graph</a>
+
+
+
+
+  </p>
+      <div class="well">
+        <h5>Select Year:</h5>
+        <select id="selYear" onchange="optionChanged(this.value)">
+        </select>
+      </div>
 </div>
-<!-- <div class="container">
+
+<!-- Graphs -->
+
+<div class="container">
     <div class="row">
-        <div class="col-sm-12">
-
-          <div id="graph1"></div>
-
+        <div class="col-md-12" id="summary">
         </div>
-        <div class="col-sm-6">
-          <div id="graph2a"></div>
-
+        <div class="col-md-12" id="map">
         </div>
-        <div class="col-sm-6">
-          <div id="graph2b"></div>
-
+        <div class="col-md-12" id="pie">
         </div>
-        <div class="col-sm-12">
-          <div id="graph3"></div>
-
-        </div> -->
+        <div class="col-md-12" id="bar">
+        </div>
+    </div>
+</div>
   <!-- Footer Section -->
   <footer>
   <div class="footer" style="background-color:#151d1e;">FLIGHT STATISTICS DASHBOARD</div>
@@ -77,8 +92,12 @@
   <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- <script src="{{ url_for('static', filename='js/style.js') }}"></script> -->
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 </body>
 
 </html>
+
+
+

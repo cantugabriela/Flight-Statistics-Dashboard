@@ -6,9 +6,12 @@
 
 body{
     background-color: #151d1e; 
+    color: white; 
 }
 
-
+.jumbotron{
+    color: black; 
+}
 /* Footer */
 footer{
     border-top-style: groove; 
@@ -29,5 +32,4 @@ footer{
     padding-top: 20px; 
     padding-bottom: 20px; 
 }
-
 
