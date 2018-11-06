@@ -1,0 +1,35 @@
+/* /* Import fonts */
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:700');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Michroma');
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
+body{
+    background-color: #151d1e; 
+    color: white; 
+}
+
+.jumbotron{
+    color: black; 
+}
+/* Footer */
+footer{
+    border-top-style: groove; 
+    border-top-color: #666;
+    background-color: #151d1e ; 
+    text-align: center; 
+    color: white; 
+    height: 60px; 
+    font-size: 20px;
+    font-family: 'Michroma', sans-serif;
+    letter-spacing: .35em;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    }
+.footer{
+    padding-top: 20px; 
+    padding-bottom: 20px; 
+}
+
