@@ -26,78 +26,80 @@
 
   <!-- NavBar -->
 
- <nav class="navbar sticky-top navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"> Make better travel plans</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Data</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Analysis</a>
-          </li>
-        </ul>
-      </div>
-    </nav> 
-<!-- Jumbotron -->
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#summary" role="button">Summary Stats</a>
-    <a class="btn btn-primary btn-lg" href="#map" role="button">Map</a>
-    <a class="btn btn-primary btn-lg" href="#pie" role="button">Pie Chart</a>
-    <a class="btn btn-primary btn-lg" href="#bar" role="button">Bar Graph</a>
-
-
-
-
-  </p>
-      <div class="well">
-        <h5>Select Year:</h5>
-        <select id="selYear" onchange="optionChanged(this.value)">
-        </select>
-      </div>
-</div>
-
-<!-- Graphs -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12" id="summary">
-        </div>
-        <div class="col-md-12" id="map">
-        </div>
-        <div class="col-md-12" id="pie">
-        </div>
-        <div class="col-md-12" id="bar">
-        </div>
+  <nav class="navbar sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"> Make better travel plans</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Data</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Analysis</a>
+        </li>
+      </ul>
     </div>
-</div>
+  </nav>
+  <!-- Jumbotron -->
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Flight Statistics Dashboard</h1>
+    <p class="lead">Bureau of Transportation Statistics Flight Data 2013-2018</p>
+    <hr class="my-4">
+    <p>This is a visual analysis of flight data related to delays accross U.S. from 2013-2018.</p>
+
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="#summary" role="button">Summary Stats</a>
+          <a class="btn btn-primary btn-lg" href="#map" role="button">Map</a>
+          <a class="btn btn-primary btn-lg" href="#pie" role="button">Pie Chart</a>
+          <a class="btn btn-primary btn-lg" href="#bar" role="button">Bar Graph</a>
+        </p>
+
+      </div>
+      <div class="col-md-6">
+
+        <div class="well">
+          <h5>Select Year:</h5>
+          <select id="selYear" onchange="optionChanged(this.value)">
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphs -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" id="summary">
+      </div>
+      <div class="col-md-12" id="map">
+      </div>
+      <div class="col-md-12" id="pie">
+      </div>
+      <div class="col-md-12" id="bar">
+      </div>
+    </div>
+  </div>
   <!-- Footer Section -->
   <footer>
-  <div class="footer" style="background-color:#151d1e;">FLIGHT STATISTICS DASHBOARD</div>
+    <div class="footer" style="background-color:#151d1e;">FLIGHT STATISTICS DASHBOARD</div>
   </footer>
-
   </div>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <!-- <script src="{{ url_for('static', filename='js/style.js') }}"></script> -->
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-
 </body>
 
 </html>
-
-
-
