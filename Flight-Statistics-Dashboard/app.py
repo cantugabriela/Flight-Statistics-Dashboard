@@ -9,7 +9,7 @@ from sqlalchemy import create_engine,inspect
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
-#import csv,sqlite
+
 
 app = Flask(__name__)
 
@@ -18,23 +18,19 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/flights_data.sqlite"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/flights_data.sqlite"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flights_data.sqlite'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
 
 # reflect an existing database into a new model
 Base = automap_base()
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
-# Save references to each table
-# Samples_Metadata = Base.classes.sample_metadata
-# Samples = Base.classes.samples
-
-
-
-engine = create_engine("sqlite:///db/flights_data.sqlite", encoding='utf8')
+engine = create_engine("sqlite:///flights_data.sqlite", encoding='utf8')
 conn = engine.connect()
 session = Session(engine)
 
