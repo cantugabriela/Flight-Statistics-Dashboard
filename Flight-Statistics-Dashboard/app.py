@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
-
+#import csv,sqlite
 
 app = Flask(__name__)
 
@@ -19,18 +19,30 @@ app = Flask(__name__)
 #################################################
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/flights_data.sqlite"
+<<<<<<< HEAD
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/flights_data.sqlite'
+=======
+>>>>>>> parent of b06006c... Fixed db datatypes, got refactored files running
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
 
 # reflect an existing database into a new model
 Base = automap_base()
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
+<<<<<<< HEAD
 engine = create_engine("sqlite:///db/flights_data.sqlite")
+=======
+# Save references to each table
+# Samples_Metadata = Base.classes.sample_metadata
+# Samples = Base.classes.samples
+
+
+
+engine = create_engine("sqlite:///db/flights_data.sqlite", encoding='utf8')
+>>>>>>> parent of b06006c... Fixed db datatypes, got refactored files running
 conn = engine.connect()
 session = Session(engine)
 
