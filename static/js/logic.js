@@ -29,7 +29,7 @@ function buildCharts(month_value) {
   var month_button = d3.select("#months")
   var month_value = month_button.property("value")
   console.log(month_value)
-  d3.json(`http://127.0.0.1:5000/monthly_count/${month_value}`).then(successHandle).catch(errorHandle)
+  d3.json(`/monthly_count/${month_value}`).then(successHandle).catch(errorHandle)
   function successHandle(response){
     console.log("response")
   }
