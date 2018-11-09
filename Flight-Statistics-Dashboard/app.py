@@ -6,6 +6,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine,inspect
+from sqlalchemy import *
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -19,24 +20,19 @@ app = Flask(__name__)
 #################################################
 
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/flights_data.sqlite"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flights_data.sqlite'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flights_data.sqlite'
+# # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
-
-# reflect an existing database into a new model
-Base = automap_base()
-# reflect the tables
-Base.prepare(db.engine, reflect=True)
-
-engine = create_engine("sqlite:///flights_data.sqlite", encoding='utf8')
-conn = engine.connect()
-session = Session(engine)
+engine = create_engine('sqlite:///test.sqlite')
+meta = MetaData()
+meta.reflect(bind=engine)
 
 
+Flight_data = meta.tables['flights_data']
 
-
+print(Flight_data)
 @app.route("/")
 def index():
     """Return the homepage."""
@@ -44,9 +40,21 @@ def index():
 
 @app.route("/years")
 def years():
-    years = pd.read_sql("SELECT year FROM flights_data",engine)
-    year_list = years['year'].unique()
-    return jsonify(year_list.tolist())
+    session = Session(engine)
+    query = session.query(Flight_data.columns.year).all()
+    print(type(query))
+    # year_list = pd.read_sql_query(query, conn=engine)
+    # print(year_list)
+    # year_list = year_list['year'].unique()
+    # print(year_list)
+    # session.close()
+
+    output = []
+    for x in query:
+        if x not in output:
+            output.append(x)
+    print(output)
+    return jsonify(output)
 
 
 # @app.route("/topflights2018")
