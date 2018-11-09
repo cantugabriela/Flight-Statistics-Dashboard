@@ -2,36 +2,56 @@ function buildMetadata(flight) {
 
 }
 
-function buildCharts(flight) {
+function buildCharts(Inputyear) {
+  // var airlineplot = d3.select("#graph1")
 
-  //Summary Chart
-
-  // Map
   
-//    // var airlineplot = d3.select("#graph1")
-//    d3.json("/top_airports").then(successHandle).catch(errorHandle)
-//    function successHandle(data){
-//      console.log(data)
-//      var trace = [{
-//        x :data.airport_name,
-//        y :data.arr_flights,
-//        type :'bar'
-//      }]
-//      Plotly.newPlot("graph1",trace) 
-//    }     
-//    function errorHandle(error){
-//      console.log(error)
-//    } 
-//  }
+  // Clear any existing metadata
+  carrier_list = []
+  avg_delay_list = []
+ 
+  //d3.json("/topflights2018").then(successHandle).catch(errorHandle)
+  var selector = d3.select("#selYear");
+  var Inputyear = selector.property("value");
+  console.log(Inputyear)
+  d3.json("/topflights/"+Inputyear).then(successHandle).catch(errorHandle)
+  function successHandle(data){
+    //console.log(data)
+    Object.entries(data).forEach(
+          function([key,value]){
+            console.log(`key is ${key},value is ${value}`)
+            x1 = key,
+            y1 = value,
+            carrier_list.push(x1)
+            avg_delay_list.push(y1)
+          })          
+    var trace = [{
+      x :carrier_list,      
+      y :avg_delay_list,
+      type :'bar',
+    }]
 
-  // Pie Chart 
+    var layout = {
+      //width: 500,
+      //height: 500,
+      title: 'USA Airlines',
+      showlegend: false,
+      xaxis: {
+        //title: "carrier_list",
+        //tickangle: -45,
+      },
+      yaxis: {
+        title: "Average Delay",
+      },
 
-  // Bar 
+    };
+    Plotly.newPlot("bar1",trace,layout) 
+  }     
+  function errorHandle(error){
+    console.log(error)
+  } 
+} 
 
-
-
-}
-console.log()
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selYear");
@@ -50,6 +70,12 @@ function init() {
     buildCharts(firstflight);
     buildMetadata(firstflight);
   });
+}
+
+function optionChanged(year){
+
+  buildCharts(year);
+
 }
 
 
