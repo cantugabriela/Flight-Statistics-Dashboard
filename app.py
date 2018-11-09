@@ -32,9 +32,6 @@ flight_data = pd.read_sql("SELECT * FROM flights_data",engine)
 # Samples_Metadata = Base.classes.sample_metadata
 # Samples = Base.classes.samples
 
-
-
-
 @app.route("/")
 def index():
     """Return the homepage."""
@@ -42,19 +39,6 @@ def index():
     return render_template("index.html")
 
 
-    
-
-
-# @app.route("/top_airlines")
-# def names():
-#     flight_data = pd.read_sql("SELECT * FROM flights_data",engine)
-#     flight_data_carrier =flight_data.groupby(['carrier_name'])
-#     top_airlines = flight_data_carrier['arr_del15'].mean()
-#     top_airlines = top_airlines.sort_values(ascending = False)
-#     topten = top_airlines.head(10)
-#     top = topten.to_dict()
-   
-#     return (top)
 @app.route("/top_airports")
 def airports():
     airports_data = pd.read_sql("SELECT airport_name,arr_flights FROM flights_data",engine)
@@ -64,6 +48,16 @@ def airports():
     topten_airports = top_airports.head(10)
     top_airport_names = topten_airports.to_dict()
     return jsonify(top_airport_names)
+    
+@app.route("/monthly_count/<month>")
+def month_count(month):
+    airports_data = pd.read_sql("SELECT airport_name,arr_flights,month FROM flights_data WHERE airport IN ('ATL', 'DFW', 'SFO', 'ORD', 'DEN', 'LAX', 'PHX', 'HOU', 'LAS', 'MSP')",engine)
+    month = int(month)
+    test_data = airports_data.loc[airports_data['month']== month,:]
+    grouped_airports = test_data.groupby(['airport_name']).sum()
+    converted_data = grouped_airports.to_dict()
+    return jsonify(converted_data)
+
 
 
 if __name__ == "__main__":
