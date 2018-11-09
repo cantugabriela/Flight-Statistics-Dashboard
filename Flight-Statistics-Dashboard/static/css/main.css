@@ -33,3 +33,6 @@ footer{
     padding-bottom: 20px; 
 }
 
+navbar-toggler-icon{
+    background-color: black !important; 
+}
