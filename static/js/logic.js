@@ -62,4 +62,5 @@ init()
 function someClick(month){
     console.log(month)
     buildCharts(month)
+    // $(this).addClass('active')
 }    
