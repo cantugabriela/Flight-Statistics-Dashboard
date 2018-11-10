@@ -49,14 +49,28 @@ def airports():
     top_airport_names = topten_airports.to_dict()
     return jsonify(top_airport_names)
     
+# @app.route("/monthly_count/<month>")
+# def month_count(month):
+#     airports_data = pd.read_sql("SELECT airport_name,arr_flights,month,Latitude,Longitude FROM flights_data WHERE airport IN ('ATL', 'DFW', 'SFO', 'ORD', 'DEN', 'LAX', 'PHX', 'HOU', 'LAS', 'MSP')",engine)
+#     month = int(month)
+#     test_data = airports_data.loc[airports_data['month']== month,:]
+#     grouped_airports = test_data.groupby(['airport_name'])
+#     total_flights_month = grouped_airports['arr_flights'].sum()  
+#     airport_lat = grouped_airports["Latitude"].unique()
+#     airport_lng = grouped_airports["Longitude"].unique()
+#     total_df = pd.DataFrame({"total_flights":total_flights_month,"latitude":airport_lat,"longitude":airport_lng})
+#     converted_data = total_df.to_dict()
+#     return jsonify(converted_data)
 @app.route("/monthly_count/<month>")
 def month_count(month):
-    airports_data = pd.read_sql("SELECT airport_name,arr_flights,month FROM flights_data WHERE airport IN ('ATL', 'DFW', 'SFO', 'ORD', 'DEN', 'LAX', 'PHX', 'HOU', 'LAS', 'MSP')",engine)
+    airports_lat_lng = pd.read_sql("SELECT  airport_name,Latitude,Longitude,month,sum(arr_flights) sum_arr_flights FROM flights_data WHERE airport IN ('ATL', 'DFW', 'SFO', 'ORD', 'DEN', 'LAX', 'PHX', 'HOU', 'LAS', 'MSP') group by airport_name,month,Latitude,Longitude",engine)
+    airports_lat_lng = airports_lat_lng.set_index('airport_name')
     month = int(month)
-    test_data = airports_data.loc[airports_data['month']== month,:]
-    grouped_airports = test_data.groupby(['airport_name']).sum()
-    converted_data = grouped_airports.to_dict()
-    return jsonify(converted_data)
+    print(month)
+    test_data = airports_lat_lng.loc[airports_lat_lng['month']== month,:]
+    air_dict = test_data.to_dict('index')
+    print(air_dict)
+    return jsonify(air_dict)
 
 
 
