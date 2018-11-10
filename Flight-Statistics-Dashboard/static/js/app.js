@@ -34,7 +34,7 @@ function buildCharts(Inputyear) {
     var layout = {
       //width: 500,
       //height: 500,
-      title: 'USA Airlines',
+      title: 'USA Domestic Airlines Yearwise Performance ',
       showlegend: false,
       xaxis: {
         //title: "carrier_list",
@@ -46,6 +46,58 @@ function buildCharts(Inputyear) {
 
     };
     Plotly.newPlot("bar1",trace,layout) 
+  }     
+  function errorHandle(error){
+    console.log(error)
+  } 
+} 
+
+function buildChartsNew(Airport, Inputyear) {
+  carrier_list1 = []
+  avg_delay_list1 = []
+ 
+  //d3.json("/topflights2018").then(successHandle).catch(errorHandle)
+  var selector = d3.select("#selYear");
+  var Inputyear = selector.property("value");
+  console.log(Inputyear)
+  var selector1 = d3.select("#selAirport");
+  var Airport = selector1.property("value");
+  console.log(Airport)
+  d3.json(`/topflightsName/${Airport}/${Inputyear}`).then(successHandle).catch(errorHandle)
+  function successHandle(data){
+    //console.log(data)
+    Object.entries(data).forEach(
+          function([key1,value1]){
+            console.log(`key is ${key1},value is ${value1}`)
+            x2 = key1,
+            y2 = value1,
+            carrier_list1.push(x2)
+            avg_delay_list1.push(y2)
+          })          
+    var trace1 = [{
+      x :carrier_list1,      
+      y :avg_delay_list1,
+      type :'bar',
+      marker:{
+      color: 'red'
+    }
+    }]
+
+    var layout = {
+      //width: 500,
+      //height: 500,
+      title: 'USA Domestic Airlines Yearwise Performance for Top Ten Airports',
+      showlegend: false,
+      xaxis: {
+        //title: "carrier_list",
+        //tickangle: -45,
+      },
+      yaxis: {
+        title: "Average Delay",
+      },
+
+    };
+    Plotly.newPlot("bar2",trace1,layout) 
   }     
   function errorHandle(error){
     console.log(error)
@@ -65,10 +117,37 @@ function init() {
         .property("value", year);
     });
 
+// Grab a reference to the dropdown select element
+      var selector1 = d3.select("#selAirport");
+      name_list = []
+      d3.json("/top_airports").then(successHandle).catch(errorHandle)
+      function successHandle(data){
+        console.log(data)
+        Object.entries(data).forEach(function(data){
+          console.log(Object.entries(data))
+          x= data[0],
+          y= data[1],
+          console.log(x),
+          console.log(y),
+          //name_list.push(x)
+          selector1
+          .append("option")
+          .text(x)
+          .property("value", x); 
+        }) 
+      }
+      function errorHandle(error){
+        console.log(error)
+      } 
+      
+
+
     // Use the first flight from the list to build the initial plots
     const firstflight = flightYears[0];
+    const firstAirport = x[0];
     buildCharts(firstflight);
     buildMetadata(firstflight);
+    buildChartsNew(firstAirport, firstflight);
   });
 }
 
@@ -77,6 +156,13 @@ function optionChanged(year){
   buildCharts(year);
 
 }
+
+function optionChanged1(airport, year){
+
+  buildChartsNew(airport, year);
+
+}
+
 
 
 // Initialize the dashboard

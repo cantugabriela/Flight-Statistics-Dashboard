@@ -86,6 +86,20 @@ def topflights(Inputyear):
     top_flights = top_flights.to_dict()
     return jsonify(top_flights)
 
+@app.route("/topflightsName/<Airport>/<Inputyear>")
+def topflightsName(Airport, Inputyear):
+    """Return a list of sample names with their average delay time."""
+    flight_data = pd.read_sql("SELECT * FROM flights_data",engine)
+    flight_data_delay = flight_data[[ "year", "airport_name", "carrier_name", "arr_delay"]]
+    #flight_data_delay["year"] = str(flight_data_delay["year"])
+    Inputyear = int(Inputyear)
+    flight_data_delay_carrier = flight_data_delay.loc[(flight_data_delay['year'] == Inputyear)&(flight_data_delay['airport_name'] == Airport), :]
+    flight_data_delay_grouped = flight_data_delay_carrier.groupby(['carrier_name'])
+    top_flights = flight_data_delay_grouped["arr_delay"].mean()
+    #top_flights = top_flights.sort_values(ascending = False)
+    #topflights = list(np.ravel(top_flights))
+    top_flightsName = top_flights.to_dict()
+    return jsonify(top_flightsName)
 
 @app.route("/topflightsAll")
 def topflightsAll():
