@@ -39,6 +39,7 @@ function buildCharts(Inputyear) {
       xaxis: {
         //title: "carrier_list",
         //tickangle: -45,
+        automargin: true,
       },
       yaxis: {
         title: "Average Delay",
@@ -87,10 +88,14 @@ function buildChartsNew(Airport, Inputyear) {
       //width: 500,
       //height: 500,
       title: 'USA Domestic Airlines Yearwise Performance for Top Ten Airports',
+    
       showlegend: false,
       xaxis: {
         //title: "carrier_list",
         //tickangle: -45,
+        //ticklen: 8,
+        automargin: true,
+
       },
       yaxis: {
         title: "Average Delay",
