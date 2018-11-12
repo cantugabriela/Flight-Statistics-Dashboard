@@ -1,4 +1,4 @@
-d3.selectAll(".month").on("mouseover", function(){
+d3.selectAll(".month").on("click", function(){
     console.log(this.value)
     someClick(this.value)
 })

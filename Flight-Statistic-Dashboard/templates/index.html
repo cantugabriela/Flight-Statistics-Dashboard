@@ -10,8 +10,6 @@
   <link rel="icon" type="image" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/airplane_2708.png">
   <title>Flights Visualization Dashboard</title>
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <!-- <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> -->
-
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -44,7 +42,7 @@
   <div id="status">&nbsp;
 <svg version="1.1" class="svg-loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     x="0px" y="0px" viewBox="0 0 80 80" xml:space="preserve">
-    <path fill="#FF0066" d="M40,72C22.4,72,8,57.6,8,40C8,22.4,
+    <path fill="#EEC14C" d="M40,72C22.4,72,8,57.6,8,40C8,22.4,
     22.4,8,40,8c17.6,0,32,14.4,32,32c0,1.1-0.9,2-2,2
     s-2-0.9-2-2c0-15.4-12.6-28-28-28S12,24.6,12,40s12.6,
     28,28,28c1.1,0,2,0.9,2,2S41.1,72,40,72z">
@@ -77,7 +75,7 @@
       <label for="carousel-f-3" class="carousel-f-indicator" title="Jump to carousel item #3">✈Carrier/Airport</label>
     </li>
         <li>
-      <label for="carousel-f-4" class="carousel-f-indicator" title="Jump to carousel item #4">📊Perfomance</label>
+      <label for="carousel-f-4" class="carousel-f-indicator" title="Jump to carousel item #4">🗹Perfomance</label>
     </li>
   </ol>
 
@@ -112,10 +110,9 @@
 
 <!-- Content -->
 
-  <!-- <img src="http://placekitten.com/700/500" style="padding:75px; margin-top: -75px;"/> -->
-<div class="container-fluid" style="padding:75px; margin-top: -75px;">
+<div class="container-fluid" style="padding:75px; margin-top: -76px;">
 
-    <div id="map"  style="width: 100%; height: 650px">  </div>
+    <div id="map"  style="width: 100%; height: 680px">  </div>
     <div class = "row mx-auto">
       <div class = "btn-tollbar offset-md-2" role ="toolbar" aria-label = "Toolbar with button groups" id ="months">
         <div class = "btn-group mr-2" role = "group" aria-label = "first group">
@@ -156,7 +153,7 @@
       <label for="carousel-f-3" class="carousel-f-control next" title="Next">»</label>
     </div>
 <!-- Content -->
-<div class="container-fluid" style="padding:75px; margin-top: -75px;">
+<div class="container-fluid" style="padding:75px; margin-top: -76px;">
     <div class='tableauPlaceholder' id='viz1542050355032' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fl&#47;FlightPaths_4&#47;Dashboard2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FlightPaths_4&#47;Dashboard2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fl&#47;FlightPaths_4&#47;Dashboard2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1542050355032');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='1220px';vizElement.style.maxWidth='1620px';vizElement.style.width='100%';vizElement.style.height='987px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
   </div>
 
@@ -170,7 +167,7 @@
       <label for="carousel-f-4" class="carousel-f-control next" title="Next">»</label>
     </div>
 <!-- Content -->
-<div class="container-fluid" style="padding:75px; margin-top: -75px;">
+<div class="container-fluid" style="padding:75px; margin-top: -76px;">
     <div class='tableauPlaceholder' id='viz1541781496622' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;pr&#47;project2_102&#47;Sheet7&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='project2_102&#47;Sheet7' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;pr&#47;project2_102&#47;Sheet7&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1541781496622');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
   </div>
 
@@ -185,7 +182,7 @@
       <label for="carousel-f-1" class="carousel-f-control next" title="Next">»</label>
     </div>
 <!-- Content -->
-<div class="container" style="padding:75px; margin-top: -75px;">
+<div class="container" style="padding:75px; margin-top: -76px;">
 <div class="col-md-12" id="bar">
   <div class="col-md-6">
     <div class="well">
@@ -217,7 +214,7 @@
 
  <!-- Footer Section -->
 <footer>
-    <div class="footer" style="background-color:#151d1e;">FLIGHT STATISTICS DASHBOARD</div>
+    <div class="footer">FLIGHT STATISTICS DASHBOARD</div>
   </footer>
 </div>
 
