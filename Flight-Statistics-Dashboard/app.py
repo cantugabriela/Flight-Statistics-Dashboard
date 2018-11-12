@@ -59,6 +59,19 @@ def airports():
     top_airport_names = topten_airports.to_dict()
     return jsonify(top_airport_names)
 
+
+@app.route("/top_airlines/<year>")
+def airlines(year):
+    airlines_data = pd.read_sql("SELECT carrier_name,year,arr_flights FROM flights_data",engine)
+    year = int(year)
+    airlines_data = airlines_data.loc[(airlines_data['year'] == year), :]
+    airlines_grouped = airlines_data.groupby(["carrier_name"])
+    top_airlines = airlines_grouped['arr_flights'].sum()
+    top_airlines = top_airlines.sort_values(ascending = False)
+    top_airlines_names = top_airlines.to_dict()
+    top_airlines_names = sorted(top_airlines_names.items(), key=lambda t: t[1])
+    return jsonify(top_airlines_names)
+
 @app.route("/topflights2018")
 def topflights2018():
     """Return a list of sample names with their average delay time."""
@@ -84,6 +97,7 @@ def topflights(Inputyear):
     #top_flights = top_flights.sort_values(ascending = False)
     #topflights = list(np.ravel(top_flights))
     top_flights = top_flights.to_dict()
+    top_flights = sorted(top_flights.items(), key=lambda t: t[1])
     return jsonify(top_flights)
 
 @app.route("/topflightsName/<Airport>/<Inputyear>")
@@ -93,12 +107,14 @@ def topflightsName(Airport, Inputyear):
     flight_data_delay = flight_data[[ "year", "airport_name", "carrier_name", "arr_delay"]]
     #flight_data_delay["year"] = str(flight_data_delay["year"])
     Inputyear = int(Inputyear)
+    #Inputyear = 2018
     flight_data_delay_carrier = flight_data_delay.loc[(flight_data_delay['year'] == Inputyear)&(flight_data_delay['airport_name'] == Airport), :]
     flight_data_delay_grouped = flight_data_delay_carrier.groupby(['carrier_name'])
     top_flights = flight_data_delay_grouped["arr_delay"].mean()
     #top_flights = top_flights.sort_values(ascending = False)
     #topflights = list(np.ravel(top_flights))
     top_flightsName = top_flights.to_dict()
+    top_flightsName = sorted(top_flightsName.items(), key=lambda t: t[1])
     return jsonify(top_flightsName)
 
 @app.route("/topflightsAll")
