@@ -5,7 +5,7 @@ d3.selectAll(".month").on("click", function(){
 })
 
 
-function buildCharts(month_value) {
+function buildMaps(month_value) {
     console.log(`calling buildCharts :`,month_value)
     d3.json(`/monthly_count/${month_value}`).then(successHandle).catch(errorHandle)
     
@@ -22,23 +22,27 @@ function buildCharts(month_value) {
             total_flights = response[resp].sum_arr_flights
             del_pct_airport = response[resp].del_pct
             airport_name = resp
+            split_text = airport_name.split(":")
+            place = split_text[0]
+            name = split_text[1]
             total_flight_markers.push(
                 L.circle(lat_lng, {
             stroke: false,
             fillOpacity: 0.75,
-            color: "purple",
+            color: "grey",
             fillColor: "purple",
-            radius: total_flights
-            })
-            ) 
+            radius: (total_flights)*1.5
+            }).bindTooltip("Name:" + name + "<hr> Location: " + place +" <hr> Total flights: " + total_flights )
+            )
+            console.log(`total:`,total_flight_markers) 
             delay_pct_markers.push(
                 L.circle(lat_lng,{
             stroke: false,
             fillOpacity: 0.75,
             color: "white",
             fillColor: "white",
-            radius: (del_pct_airport*total_flights)/100
-            })
+            radius: ((del_pct_airport*total_flights)/100)*1.5
+            }).bindTooltip("Name:" + name + "<hr> Location: " + place +" <hr> Delay %: " + del_pct_airport )
             )          
         }
         console.log(`finished parsing response`)
@@ -72,8 +76,8 @@ function buildCharts(month_value) {
 
         //create an overlay object
         var overlayMaps = {
-            "total number of flights": flights,
-            "delay percentage":delay
+            "Total Arrivals": flights,
+            "Total Delays":delay
         }
         
         var container = L.DomUtil.get('map')
@@ -84,7 +88,7 @@ function buildCharts(month_value) {
         var myMap = L.map("map",{
             center: [37.0902, -95.7129],
             zoom:5,
-            layers:[streetmap,flights,delay]
+            layers:[darkmap,flights,delay]
         })
 
         L.control.layers(baseMaps,overlayMaps,{
@@ -98,7 +102,7 @@ function buildCharts(month_value) {
 }
 
 function init(){
-    buildCharts(1)
+    buildMaps(1)
 }
 init()
 
@@ -108,5 +112,5 @@ function clearCircles(){
   
 function someClick(month){
     clearCircles()
-    buildCharts(month)
+    buildMaps(month)
 }
