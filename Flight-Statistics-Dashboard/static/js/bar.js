@@ -57,7 +57,7 @@ function buildCharts(Inputyear) {
   } 
 
 
-function buildChartsNew(Airport, Inputyear) {
+function buildChartsNew(Airport) {
     carrier_list1 = []
     avg_delay_list1 = []
     var Inputyear = 2018;
@@ -107,22 +107,7 @@ function buildChartsNew(Airport, Inputyear) {
         },
   
       };
-      Plotly.newPlot("bar2",trace1,layout) 
-      function randomize() {
-        Plotly.animate('bar2', {
-          data: [{y: [Math.random(), Math.random(), Math.random()]}],
-          traces: [0],
-          layout: {}
-        }, {
-          transition: {
-            duration: 500,
-            easing: 'cubic-in-out'
-          },
-          frame: {
-            duration: 500
-          }
-        })
-      }
+      Plotly.newPlot("bar2",trace1,layout)     
 
     }     
     function errorHandle(error){
@@ -146,37 +131,35 @@ function buildChartsNew(Airport, Inputyear) {
       });
   
   // Grab a reference to the dropdown select element
-        var selector1 = d3.select("#selAirport");
-        name_list = []
-        d3.json("/top_airports").then(successHandle).catch(errorHandle)
+      var selector1 = d3.select("#selAirport");
+      name_list = []
+      d3.json("/top_airports").then(successHandle)
         function successHandle(data){
           //console.log(data)
           Object.entries(data).forEach(function(data){
-            console.log(Object.entries(data))
+            //console.log(Object.entries(data))
             x= data[0],
             y= data[1],
             //console.log(x),
             //console.log(y),
-            name_list.push(x)
+            name_list.push(x);
             selector1
             .append("option")
             .text(x)
             .property("value", x); 
-          }) 
-        }
-        function errorHandle(error){
-          console.log(error)
-        } 
+          }); 
         
   
   
       // Use the first flight from the list to build the initial plots
       const firstflight = flightYears[0];
-      const firstAirport = name_list[0];
+      var Airport = name_list[0];
+      //const Airport = "Chicago, IL: Chicago O'Hare International";
+      // var selector1 = d3.select("#selAirport");
+      // var Airport = selector1.property("value");
       buildCharts(firstflight);
-      //buildMetadata(firstflight);
-      buildChartsNew(firstAirport);
-      //buildAllCharts(firstAirport, firstflight)
+      buildChartsNew(Airport);
+        }
     });
   }
 
@@ -185,11 +168,11 @@ function buildChartsNew(Airport, Inputyear) {
     buildCharts(year);
   
   }
-  function optionChanged1(airport, year){
+  function optionChanged1(airport){
       console.log(airport)
       //console.log(year)
   
-    buildChartsNew(airport, year);
+    buildChartsNew(airport);
   
   }
   
