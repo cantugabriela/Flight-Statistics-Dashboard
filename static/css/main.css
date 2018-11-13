@@ -1,0 +1,19 @@
+
+/* Style the buttons */
+.btn {
+    border: 10px silver;
+    outline: 2px;
+    padding: 10px 16px;
+    background-color:rgb(223, 186, 223);
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+    color:black;   
+    
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active, .btn:hover {
+    background-color: purple;
+    color: silver;
+}

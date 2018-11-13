@@ -1,8 +1,19 @@
+var current_month = 1
 d3.selectAll(".month").on("click", function(){
-    console.log('selected value')
     console.log(this.value)
-    someClick(this.value)
+    someClick(this.value)    
+    var map_btns = document.getElementsByClassName("btn  month") 
+    for(var i=0; i<map_btns.length; i++){
+        if(map_btns[i].value == current_month){
+            map_btns[i].className = "btn  month"
+        }
+        else if (map_btns[i].value == this.value){
+            map_btns[i].className = "btn  month active"
+        }        
+    }
+    current_month = this.value
 })
+
 
 
 function buildMaps(month_value) {
@@ -32,7 +43,7 @@ function buildMaps(month_value) {
             color: "grey",
             fillColor: "purple",
             radius: (total_flights)*1.5
-            }).bindTooltip("Name:" + name + "<hr> Location: " + place +" <hr> Total flights: " + total_flights )
+            }).bindTooltip("Name:" + name + "<hr> Location: " + place +" <hr> Total flights: " + total_flights.toLocaleString() )
             )
             console.log(`total:`,total_flight_markers) 
             delay_pct_markers.push(
@@ -42,7 +53,7 @@ function buildMaps(month_value) {
             color: "white",
             fillColor: "white",
             radius: ((del_pct_airport*total_flights)/100)*1.5
-            }).bindTooltip("Name:" + name + "<hr> Location: " + place +" <hr> Delay %: " + del_pct_airport )
+            }).bindTooltip("Name:" + name + "<hr> Location: " + place +" <hr> Delay %: " + del_pct_airport.toFixed(2) )
             )          
         }
         console.log(`finished parsing response`)

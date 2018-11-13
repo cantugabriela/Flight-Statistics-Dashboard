@@ -15,18 +15,9 @@
   integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
   crossorigin=""></script>
 
-  <!-- Our CSS -->
-  <!-- <link rel="stylesheet" type="text/css" href="../style.css"> -->
-  <style>
-    body {
-        padding: 0;
-        margin: 0;
-    }
-    html, body, #map {
-        height: 100%;
-        width: 100%;
-    }
-</style>
+ <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+ 
 </head>
 
 <body>
@@ -55,42 +46,31 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script> -->
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
   
-<div class ="container-fluid">
-  <div class = "row">
-    <h2 class = "text-center text-white col-md-8 offset col-md-2">
-       Flight Delays At Major Airports
-    </h2>
-  </div>  
-</div>
-
-
   
-<div id="map"> </div>
-
-
+<div id="map"  style="width: 100%; height: 680px">  </div>
 
 
 <div class = "row mx-auto">
   <div class = "btn-tollbar offset-md-2" role ="toolbar" aria-label = "Toolbar with button groups" id ="months">
     <div class = "btn-group mr-2" role = "group" aria-label = "first group">
-        <button type="button" class="btn btn-info month" value = "1" >Jan</button>
-        <button type="button" class="btn btn-warning month" value = "2">Feb</button>
-        <button type="button" class="btn btn-warning month" value = "3">Mar</button>
+        <button type="button" class="btn  month active" value = "1" >Jan</button>
+        <button type="button" class="btn  month" value = "2">Feb</button>
+        <button type="button" class="btn  month" value = "3">Mar</button>
     </div>
     <div class = "btn-group mr-2" role = "group" aria-label = "second group">
-        <button type="button" class="btn btn-warning month" value = "4">Apr</button>
-        <button type="button" class="btn btn-warning month" value = "5">May</button>
-        <button type="button" class="btn btn-warning month" value = "6">June</button>
+        <button type="button" class="btn  month" value = "4">Apr</button>
+        <button type="button" class="btn  month" value = "5">May</button>
+        <button type="button" class="btn  month" value = "6">June</button>
     </div>
     <div class = "btn-group mr-2" role = "group" aria-label = "third group">
-        <button type="button" class="btn btn-warning month" value = "7">July</button>
-        <button type="button" class="btn btn-warning month" value = "8">Aug</button>
-        <button type="button" class="btn btn-warning month" value = "9">Sept</button>
+        <button type="button" class="btn  month" value = "7">July</button>
+        <button type="button" class="btn  month" value = "8">Aug</button>
+        <button type="button" class="btn  month" value = "9">Sept</button>
     </div>
     <div class = "btn-group mr-2" role = "group" aria-label = "fourth group">
-        <button type="button" class="btn btn-warning month" value = "10">Oct</button>
-        <button type="button" class="btn btn-warning month" value = "11">Nov</button>
-        <button type="button" class="btn btn-warning month" value = "12">Dec</button>
+        <button type="button" class="btn  month" value = "10">Oct</button>
+        <button type="button" class="btn  month" value = "11">Nov</button>
+        <button type="button" class="btn  month" value = "12">Dec</button>
     </div>
   </div>
 </div>
