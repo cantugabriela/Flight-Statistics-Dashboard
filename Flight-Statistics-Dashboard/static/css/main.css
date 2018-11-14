@@ -1,5 +1,7 @@
 
 /* /* Import fonts */
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:700');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 @import url('https://fonts.googleapis.com/css?family=Michroma');
 @import url('https://fonts.googleapis.com/css?family=Karla');
 
@@ -31,7 +33,6 @@ nav{
     top: 0;
     transition: opacity 0.6s ease-in-out;
     width: 100%;
-    overflow: hidden !important;
   }
   
   .carousel-f-active:checked + .carousel-f-item {
@@ -71,12 +72,10 @@ nav{
   
   .carousel-f-control.prev {
     float: left;
-    color: white; 
   }
   
   .carousel-f-control.next {
     float: right;
-    color: white; 
   }
   
   .carousel-f-caption {
@@ -145,15 +144,8 @@ nav{
     .carousel-f-indicators {
       position: absolute;
     }
-
   }
   
-  @media (max-width: 1300px) {
-    .navbar .navbar-brand {
-      float: none; 
-      display: none; 
-    } 
-  }
 
   /* Footer */
   footer{
@@ -213,67 +205,4 @@ nav{
 
     #map{
       z-index: 1 !important;
-      
   }
-
-
-  
-/* Style the buttons */
-.btn {
-  border: 10px silver;
-  outline: 2px;
-  padding: 10px 16px;
-  background-color:rgb(223, 186, 223);
-  cursor: pointer;
-  font-size: 18px;
-  border-radius: 50%;
-  color:black;   
-  
-}
-
-/* Style the active class, and buttons on mouse-over */
-.month .active, .btn:hover {
-  background-color: purple;
-  color: silver;
-}
-
-
-.btn {
-  border: 10px silver;
-  padding: 10px 16px;
-  background-color:rgb(223, 186, 223);
-  cursor: pointer;
-  font-size: 18px;
-  border-radius: 50%;
-  color:black;  
-  -webkit-transition-duration: 0.4s;  
-  transition-duration: 0.4s;
-  text-decoration: none;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.btn:after {
-  content: "";
-  background: silver;
-  display: block;
-  position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
-  margin-left: -20px!important;
-  margin-top: -120%;
-  opacity: 0;
-  transition: all 0.8s;
-}
-
-.btn:active:after {
-  padding: 0;
-  margin: 10;
-  opacity: 2;
-  transition: 0s;
-}
-.month .active, .btn:hover {
-  background-color: purple;
-  color: silver;
-  } 
-
