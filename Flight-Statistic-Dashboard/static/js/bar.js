@@ -49,7 +49,7 @@ function buildCharts(Inputyear) {
       },
 
     };
-    Plotly.newPlot("bar1",trace,layout) 
+    Plotly.newPlot("bar1",trace,layout, {responsive: true}) 
   }     
   function errorHandle(error){
     console.log(error)
@@ -107,7 +107,7 @@ function buildChartsNew(Airport) {
       },
 
     };
-    Plotly.newPlot("bar2",trace1,layout)     
+    Plotly.newPlot("bar2",trace1,layout, {responsive: true})     
 
   }     
   function errorHandle(error){

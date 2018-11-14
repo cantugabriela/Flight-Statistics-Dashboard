@@ -96,11 +96,10 @@ function buildMaps(month_value) {
             container._leaflet_id = null; 
         }
 
-        var myMap = L.map("map",{
-            center: [37.0902, -95.7129],
-            zoom:5,
-            layers:[darkmap,flights,delay]
-        })
+        var myMap = L.map("map", {
+            layers: [darkmap, flights, delay],
+
+        }).setView([37.0902, -95.7129], 5)
 
         L.control.layers(baseMaps,overlayMaps,{
             collapsed:false
