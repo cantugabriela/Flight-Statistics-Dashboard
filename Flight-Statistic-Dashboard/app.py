@@ -87,6 +87,7 @@ def topflights(Inputyear):
     #top_flights = top_flights.sort_values(ascending = False)
     #topflights = list(np.ravel(top_flights))
     top_flights = top_flights.to_dict()
+    top_flights = sorted(top_flights.items(), key=lambda t: t[1])
     return jsonify(top_flights)
 
 @app.route("/topflightsName/<Airport>/<Inputyear>")
@@ -95,14 +96,18 @@ def topflightsName(Airport, Inputyear):
     flight_data = pd.read_sql("SELECT * FROM flights_data",engine)
     flight_data_delay = flight_data[[ "year", "airport_name", "carrier_name", "arr_delay"]]
     #flight_data_delay["year"] = str(flight_data_delay["year"])
+    flight_data_delay = flight_data_delay.replace("Dallas/Fort Worth, TX: Dallas/Fort Worth International", "Dallas Fort Worth International")
+    flight_data_delay = flight_data_delay.replace("Houston, TX: George Bush Intercontinental/Houston", "George Bush Intercontinental Houston")
+    flight_data_delay = flight_data_delay.replace("Atlanta, GA: Hartsfield-Jackson Atlanta International", "Hartsfield Jackson Atlanta International")
     Inputyear = int(Inputyear)
+    #Inputyear = 2018
     flight_data_delay_carrier = flight_data_delay.loc[(flight_data_delay['year'] == Inputyear)&(flight_data_delay['airport_name'] == Airport), :]
     flight_data_delay_grouped = flight_data_delay_carrier.groupby(['carrier_name'])
     top_flights = flight_data_delay_grouped["arr_delay"].mean()
-    #top_flights = top_flights.sort_values(ascending = False)
-    #topflights = list(np.ravel(top_flights))
     top_flightsName = top_flights.to_dict()
+    top_flightsName = sorted(top_flightsName.items(), key=lambda t: t[1])
     return jsonify(top_flightsName)
+
 
 @app.route("/topflightsAll")
 def topflightsAll():
@@ -130,6 +135,9 @@ def topflightsAll():
 @app.route("/top_airports")
 def airports():
     airports_data = pd.read_sql("SELECT airport_name,arr_flights FROM flights_data",engine)
+    airports_data = airports_data.replace("Dallas/Fort Worth, TX: Dallas/Fort Worth International", "Dallas Fort Worth International")
+    airports_data = airports_data.replace("Houston, TX: George Bush Intercontinental/Houston", "George Bush Intercontinental Houston")
+    airports_data = airports_data.replace("Atlanta, GA: Hartsfield-Jackson Atlanta International", "Hartsfield Jackson Atlanta International")
     airport_grouped = airports_data.groupby(["airport_name"])
     top_airports = airport_grouped['arr_flights'].sum()
     top_airports = top_airports.sort_values(ascending = False)
@@ -139,14 +147,25 @@ def airports():
     
 @app.route("/monthly_count/<month>")
 def month_count(month):
-    airports_lat_lng = pd.read_sql("SELECT  airport_name,Latitude,Longitude,month,sum(arr_flights) sum_arr_flights FROM flights_data WHERE airport IN ('ATL', 'DFW', 'SFO', 'ORD', 'DEN', 'LAX', 'PHX', 'HOU', 'LAS', 'MSP') group by airport_name,month,Latitude,Longitude",engine)
-    airports_lat_lng = airports_lat_lng.set_index('airport_name')
-    month = int(month)
-    print(month)
-    test_data = airports_lat_lng.loc[airports_lat_lng['month']== month,:]
-    air_dict = test_data.to_dict('index')
-    print(air_dict)
-    return jsonify(air_dict)
+   airports_lat_lng = pd.read_sql("SELECT  airport_name,Latitude,Longitude,month,sum(arr_flights) sum_arr_flights,(sum(arr_del15)/sum(arr_flights))*100 del_pct FROM flights_data WHERE airport IN ('ATL', 'DFW', 'SFO', 'ORD', 'DEN', 'LAX', 'PHX', 'HOU', 'LAS', 'MSP') group by airport_name,month,Latitude,Longitude",engine)
+   airports_lat_lng = airports_lat_lng.set_index('airport_name')
+   month = int(month)
+   print(month)
+   test_data = airports_lat_lng.loc[airports_lat_lng['month']== month,:]
+   air_dict = test_data.to_dict('index')
+   print(air_dict)
+   return jsonify(air_dict)
+
+@app.route("/monthly_count_canc_div/<month>")
+def month_counts(month):
+   airports_lat_lngs = pd.read_sql("SELECT  airport_name,Latitude,Longitude,month,sum(arr_flights) sum_arr_flights,(sum(arr_del15)/sum(arr_flights))*100 del_pct ,sum(arr_cancelled) sum_arr_canc,sum(arr_diverted) sum_arr_div FROM flights_data WHERE airport IN ('ATL', 'DFW', 'SFO', 'ORD', 'DEN', 'LAX', 'PHX', 'HOU', 'LAS', 'MSP') group by airport_name,month,Latitude,Longitude",engine)
+   airports_lat_lngs = airports_lat_lngs.set_index('airport_name')
+   months = int(month)
+   print(months)
+   test_datas = airports_lat_lngs.loc[airports_lat_lngs['month']== months,:]
+   air_dicts = test_datas.to_dict('index')
+   print(air_dicts)
+   return jsonify(air_dicts)
 
 
 if __name__ == "__main__":
